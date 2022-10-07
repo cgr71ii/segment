@@ -1,6 +1,6 @@
 package net.loomchild.segment.srx;
 
-import java.util.regex.Pattern;
+import com.google.re2j.Pattern;
 
 /**
  * Represents mapping between language code pattern and language rule.

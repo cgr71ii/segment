@@ -16,8 +16,8 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Map;
 import java.util.jar.Manifest;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.re2j.Matcher;
+import com.google.re2j.Pattern;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
+import com.google.re2j.Pattern;
 
 import net.loomchild.segment.util.Util;
 

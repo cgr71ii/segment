@@ -3,7 +3,7 @@ package net.loomchild.segment.srx.legacy;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Pattern;
+import com.google.re2j.Pattern;
 
 import net.loomchild.segment.srx.LanguageRule;
 import net.loomchild.segment.srx.Rule;

@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Pattern;
+import com.google.re2j.Pattern;
 
 import net.loomchild.segment.AbstractTextIterator;
 import net.loomchild.segment.TextIterator;

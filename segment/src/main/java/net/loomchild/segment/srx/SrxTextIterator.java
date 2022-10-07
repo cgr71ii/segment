@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.re2j.Matcher;
+import com.google.re2j.Pattern;
 
 import net.loomchild.segment.AbstractTextIterator;
 import net.loomchild.segment.util.IORuntimeException;

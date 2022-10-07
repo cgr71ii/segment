@@ -1,7 +1,7 @@
 package net.loomchild.segment.srx;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.re2j.Matcher;
+import com.google.re2j.Pattern;
 
 import net.loomchild.segment.util.Util;
 

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.StringReader;
-import java.util.regex.Pattern;
+import com.google.re2j.Pattern;
 
 import org.junit.Test;
 

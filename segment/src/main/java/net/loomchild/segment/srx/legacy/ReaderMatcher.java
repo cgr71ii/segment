@@ -1,15 +1,14 @@
 package net.loomchild.segment.srx.legacy;
 
-import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.re2j.Matcher;
+import com.google.re2j.Pattern;
 
 /**
  * Represents {@link MatchResult} that uses {@link ReaderCharSequence} as
  * a text - it takes care of exceptions that are thrown by it. 
  * @author loomchild
  */
-public class ReaderMatcher implements MatchResult {
+public class ReaderMatcher {
 	
 	private Matcher matcher;
 	
@@ -23,9 +22,8 @@ public class ReaderMatcher implements MatchResult {
 		this.matcher = pattern.matcher(text);
 	}
 
-	public ReaderMatcher appendReplacement(StringBuffer sb, String replacement) {
+	public void appendReplacement(StringBuffer sb, String replacement) {
 		matcher.appendReplacement(sb, replacement);
-		return this;
 	}
 	
 	public StringBuffer appendTail(StringBuffer sb) {
@@ -84,14 +82,6 @@ public class ReaderMatcher implements MatchResult {
 	public int groupCount() {
 		return matcher.groupCount();
 	}
-
-	public boolean hasAnchoringBounds() {
-		return matcher.hasAnchoringBounds();
-	}
-
-	public boolean hasTransparentBounds() {
-		return matcher.hasTransparentBounds();
-	}
 	
 	public boolean hitEnd() {
 		return matcher.hitEnd();
@@ -133,9 +123,8 @@ public class ReaderMatcher implements MatchResult {
 		return matcher.pattern();
 	}
 	
-	public ReaderMatcher region(int start, int end) {
+	public void region(int start, int end) {
 		matcher.region(start, end);
-		return this;
 	}
 	
 	public int regionEnd() {
@@ -173,19 +162,13 @@ public class ReaderMatcher implements MatchResult {
 		}
 		return result;
 	}
-
-	public boolean requireEnd() {
-		return matcher.requireEnd();
-	}
 	
-	public ReaderMatcher reset() {
+	public void reset() {
 		matcher.reset();
-		return this;
 	}
 
-	public ReaderMatcher reset(CharSequence input) {
+	public void reset(CharSequence input) {
 		matcher.reset(input);
-		return this;
 	}
 	
 	public int start() {
@@ -196,27 +179,12 @@ public class ReaderMatcher implements MatchResult {
 		return matcher.start(group);
 	}
 
-	public MatchResult toMatchResult() {
-		return matcher.toMatchResult();
-	}
-
 	public String toString() {
 		return "ReaderMatcher: " + matcher.toString();
 	}
 
-	public ReaderMatcher useAnchoringBounds(boolean b) {
-		matcher.useAnchoringBounds(b);
-		return this;
-	}
-
-	public ReaderMatcher usePattern(Pattern newPattern) {
-		matcher.usePattern(newPattern);
-		return this;
-	}
-
-	public ReaderMatcher useTransparentBounds(boolean b) {
+	public void useTransparentBounds(boolean b) {
 		matcher.useTransparentBounds(b);
-		return this;
 	}
 	
 	private int getEnd() {

@@ -3,8 +3,8 @@ package net.loomchild.segment.srx.io;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.re2j.Matcher;
+import com.google.re2j.Pattern;
 
 import net.loomchild.segment.util.IORuntimeException;
 import net.loomchild.segment.util.XmlException;
