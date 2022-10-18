@@ -374,10 +374,13 @@ public class SrxTextIterator extends AbstractTextIterator {
 			ruleManager.getExceptionPattern(ruleMatcher.getRule());
 		
 		if (pattern != null) {
-			Matcher matcher = pattern.matcher(textManager.getText());
-			matcher.useTransparentBounds(true);
-			matcher.region(ruleMatcher.getBreakPosition(), 
-					textManager.getText().length());
+			CharSequence text = textManager.getText();
+
+			text = text.subSequence(ruleMatcher.getBreakPosition(),
+									textManager.getText().length())
+
+			Matcher matcher = pattern.matcher(text);
+
 			return !matcher.lookingAt();
 		} else {
 			return true;

@@ -172,13 +172,7 @@ public class FastTextIterator extends AbstractTextIterator {
 							// Null non breaking pattern does not match anything
 							if (nonBreakingPattern != null) {
 								ReaderMatcher nonBreakingMatcher = new ReaderMatcher(
-										nonBreakingPattern, text);
-								nonBreakingMatcher.useTransparentBounds(true);
-								// When using transparent bound the upper bound
-								// is not important?
-								// Needed because text.length() is unknown.
-								nonBreakingMatcher.region(endPosition,
-										endPosition);
+										nonBreakingPattern, text.subSequence(endPosition, endPosition)); // Needed because text.length() is unknown.
 								found = !nonBreakingMatcher.lookingAt();
 							}
 

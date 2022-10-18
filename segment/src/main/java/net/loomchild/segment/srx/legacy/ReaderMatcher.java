@@ -15,11 +15,14 @@ public class ReaderMatcher {
 	private CharSequence text;
 	
 	private int oldLength;
+
+	private boolean found;
 	
 	public ReaderMatcher(Pattern pattern, CharSequence text) {
 		this.text = text;
 		this.oldLength = text.length();
 		this.matcher = pattern.matcher(text);
+		this.found = true;
 	}
 
 	public void appendReplacement(StringBuffer sb, String replacement) {
@@ -39,10 +42,10 @@ public class ReaderMatcher {
 	}
 	
 	public boolean find() {
-		boolean result = false;
+		found = false;
 		int end = getEnd();
 		try {
-			result = matcher.find();
+			found = matcher.find();
 		} catch (IndexOutOfBoundsException e) {
 		}
 		if (lengthChanged()) {
@@ -50,15 +53,15 @@ public class ReaderMatcher {
 			int regionEnd = Math.min(text.length(), matcher.regionEnd());
 			matcher.reset(text);
 			matcher.region(regionStart, regionEnd);
-			result = matcher.find();
+			found = matcher.find();
 		}
-		return result;
+		return found;
 	}
 
 	public boolean find(int start) {
-		boolean result = false;
+		found = false;
 		try {
-			result = matcher.find(start);
+			found = matcher.find(start);
 		} catch (IndexOutOfBoundsException e) {
 		}
 		if (lengthChanged()) {
@@ -66,9 +69,9 @@ public class ReaderMatcher {
 			int regionEnd = Math.min(text.length(), matcher.regionEnd());
 			matcher.reset(text);
 			matcher.region(regionStart, regionEnd);
-			result = matcher.find(start);
+			found = matcher.find(start);
 		}
-		return result;
+		return found;
 	}
 
 	public String group() {
@@ -84,7 +87,7 @@ public class ReaderMatcher {
 	}
 	
 	public boolean hitEnd() {
-		return matcher.hitEnd();
+		return !found;
 	}
 	
 	public boolean lookingAt() {
@@ -181,10 +184,6 @@ public class ReaderMatcher {
 
 	public String toString() {
 		return "ReaderMatcher: " + matcher.toString();
-	}
-
-	public void useTransparentBounds(boolean b) {
-		matcher.useTransparentBounds(b);
 	}
 	
 	private int getEnd() {
