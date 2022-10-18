@@ -65,11 +65,10 @@ public class ReaderMatcherTest {
 	public void testLookingAt() {
 		StringReader reader = new StringReader(REGEX_DATA);
 		CharSequence text = new ReaderCharSequence(reader);
-		ReaderMatcher matcher = new ReaderMatcher(REGEX_LOOKING_AT, text);
-		matcher.region(1, text.length());
-		assertTrue(matcher.lookingAt());
-		matcher.region(2, text.length());
-		assertFalse(matcher.lookingAt());
+		ReaderMatcher matcher1 = new ReaderMatcher(REGEX_LOOKING_AT, text.subSequence(1, text.length()));
+		ReaderMatcher matcher2 = new ReaderMatcher(REGEX_LOOKING_AT, text.subSequence(2, text.length()));
+		assertTrue(matcher1.lookingAt());
+		assertFalse(matcher2.lookingAt());
 	}
 
 }

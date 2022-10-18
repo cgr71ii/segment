@@ -50,7 +50,7 @@ public class RuleMatcher {
 	public boolean find() {
 		found = false;
 		while ((!found) && beforeMatcher.find()) {
-			afterMatcher.region(beforeMatcher.end(), text.length());
+			this.afterMatcher = afterPattern.matcher(text.subSequence(beforeMatcher.end(), text.length()));
 			found = afterMatcher.lookingAt();
 		}
 		return found;
@@ -62,7 +62,7 @@ public class RuleMatcher {
 	 * @return true if rule has been matched
 	 */
 	public boolean find(int start) {
-		beforeMatcher.region(start, text.length());
+		this.beforeMatcher = beforePattern.matcher(text.subSequence(start, text.length()));
 		return find();
 	}
 	

@@ -17,12 +17,21 @@ public class ReaderMatcher {
 	private int oldLength;
 
 	private boolean found;
+
+	private int matcherRegionStart;
+
+	private int matcherRegionEnd;
+
+	private Pattern ptn;
 	
 	public ReaderMatcher(Pattern pattern, CharSequence text) {
 		this.text = text;
 		this.oldLength = text.length();
 		this.matcher = pattern.matcher(text);
 		this.found = true;
+		this.matcherRegionStart = 0;
+		this.matcherRegionEnd = text.length();
+		this.ptn = pattern;
 	}
 
 	public void appendReplacement(StringBuffer sb, String replacement) {
@@ -49,10 +58,11 @@ public class ReaderMatcher {
 		} catch (IndexOutOfBoundsException e) {
 		}
 		if (lengthChanged()) {
-			int regionStart = Math.max(end, matcher.regionStart());
-			int regionEnd = Math.min(text.length(), matcher.regionEnd());
-			matcher.reset(text);
-			matcher.region(regionStart, regionEnd);
+			int regionStart = Math.max(end, matcherRegionStart);
+			int regionEnd = Math.min(text.length(), matcherRegionEnd);
+			matcher.reset(text.subSequence(regionStart, regionEnd));
+			matcherRegionStart = regionStart;
+			matcherRegionEnd = regionEnd;
 			found = matcher.find();
 		}
 		return found;
@@ -65,10 +75,11 @@ public class ReaderMatcher {
 		} catch (IndexOutOfBoundsException e) {
 		}
 		if (lengthChanged()) {
-			int regionStart = matcher.regionStart();
-			int regionEnd = Math.min(text.length(), matcher.regionEnd());
-			matcher.reset(text);
-			matcher.region(regionStart, regionEnd);
+			int regionStart = matcherRegionStart;
+			int regionEnd = Math.min(text.length(), matcherRegionEnd);
+			matcher.reset(text.subSequence(regionStart, regionEnd));
+			matcherRegionStart = regionStart;
+			matcherRegionEnd = regionEnd;
 			found = matcher.find(start);
 		}
 		return found;
@@ -97,10 +108,11 @@ public class ReaderMatcher {
 		} catch (IndexOutOfBoundsException e) {
 		}
 		if (lengthChanged()) {
-			int regionStart = matcher.regionStart();
-			int regionEnd = Math.min(text.length(), matcher.regionEnd());
-			matcher.reset(text);
-			matcher.region(regionStart, regionEnd);
+			int regionStart = matcherRegionStart;
+			int regionEnd = Math.min(text.length(), matcherRegionEnd);
+			matcher.reset(text.subSequence(regionStart, regionEnd));
+			matcherRegionStart = regionStart;
+			matcherRegionEnd = regionEnd;
 			result = matcher.lookingAt();
 		}
 		return result;
@@ -113,10 +125,11 @@ public class ReaderMatcher {
 		} catch (IndexOutOfBoundsException e) {
 		}
 		if (lengthChanged()) {
-			int regionStart = matcher.regionStart();
-			int regionEnd = Math.min(text.length(), matcher.regionEnd());
-			matcher.reset(text);
-			matcher.region(regionStart, regionEnd);
+			int regionStart = matcherRegionStart;
+			int regionEnd = Math.min(text.length(), matcherRegionEnd);
+			matcher.reset(text.subSequence(regionStart, regionEnd));
+			matcherRegionStart = regionStart;
+			matcherRegionEnd = regionEnd;
 			result = matcher.matches();
 		}
 		return result;
@@ -125,17 +138,19 @@ public class ReaderMatcher {
 	public Pattern pattern() {
 		return matcher.pattern();
 	}
-	
+
 	public void region(int start, int end) {
-		matcher.region(start, end);
+		this.matcher = pattern.matcher(this.text.subSequence(start, end));
+		this.matcherRegionStart = start;
+		this.matcherRegionEnd = end;
 	}
 	
 	public int regionEnd() {
-		return matcher.regionEnd();
+		return matcherRegionEnd;
 	}
 
 	public int regionStart() {
-		return matcher.regionStart();
+		return matcherRegionStart;
 	}
 	
 	public String replaceAll(String replacement) {
