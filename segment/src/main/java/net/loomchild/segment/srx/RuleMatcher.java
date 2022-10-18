@@ -24,7 +24,11 @@ public class RuleMatcher {
 	
 	private Matcher afterMatcher;
 	
-	boolean found;
+	private boolean found;
+
+	private Pattern beforePattern;
+
+	private Pattern afterPattern;
 
 	
 	/**
@@ -36,8 +40,8 @@ public class RuleMatcher {
 		this.document = document;
 		this.rule = rule;
 		this.text = text;
-		Pattern beforePattern = Util.compile(document, rule.getBeforePattern());
-		Pattern afterPattern = Util.compile(document, rule.getAfterPattern());
+		this.beforePattern = Util.compile(document, rule.getBeforePattern());
+		this.afterPattern = Util.compile(document, rule.getAfterPattern());
 		this.beforeMatcher = beforePattern.matcher(text);
 		this.afterMatcher = afterPattern.matcher(text);	
 		this.found = true;

@@ -140,7 +140,7 @@ public class ReaderMatcher {
 	}
 
 	public void region(int start, int end) {
-		this.matcher = pattern.matcher(this.text.subSequence(start, end));
+		this.matcher = this.ptn.matcher(this.text.subSequence(start, end));
 		this.matcherRegionStart = start;
 		this.matcherRegionEnd = end;
 	}

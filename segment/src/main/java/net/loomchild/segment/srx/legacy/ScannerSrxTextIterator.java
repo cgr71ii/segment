@@ -72,7 +72,7 @@ public class ScannerSrxTextIterator extends AbstractTextIterator {
 		String separator = 
 			createSeparator(languageRuleList);
 		this.scanner = scanner;
-		this.scanner.useDelimiter(Pattern.compile(separator));
+		this.scanner.useDelimiter(Pattern.compile(separator).toString());
 		this.exceptionMap = createExceptions(languageRuleList);
 	}
 	
@@ -198,12 +198,12 @@ public class ScannerSrxTextIterator extends AbstractTextIterator {
 	private boolean isException(StringBuilder segment) {
 		if (exceptionMap.size() > 0) {
 			for (Map.Entry<Pattern, Pattern> entry : exceptionMap.entrySet()) {
-				String result = scanner.findWithinHorizon(entry.getKey(), 100);
+				String result = scanner.findWithinHorizon(entry.getKey().toString(), 100);
 				if (result != null) {
 					segment.append(result);
 					Pattern pattern = entry.getValue();
 					if (pattern != null) {
-						if (scanner.findWithinHorizon(pattern, 1) != null) {
+						if (scanner.findWithinHorizon(pattern.toString(), 1) != null) {
 							return true;
 						} else {
 							return false;

@@ -377,7 +377,7 @@ public class SrxTextIterator extends AbstractTextIterator {
 			CharSequence text = textManager.getText();
 
 			text = text.subSequence(ruleMatcher.getBreakPosition(),
-									textManager.getText().length())
+									textManager.getText().length());
 
 			Matcher matcher = pattern.matcher(text);
 
