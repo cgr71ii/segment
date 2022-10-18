@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import com.google.re2j.Pattern;
+import com.google.re2j.PatternSyntaxException;
 
 import net.loomchild.segment.AbstractTextIterator;
 import net.loomchild.segment.TextIterator;
@@ -78,6 +79,7 @@ public class ScannerSrxTextIterator extends AbstractTextIterator {
 	
 	private String createSeparator(List<LanguageRule> languageRuleList) {
 		this.noBreakRules = true;
+		/*
 		StringBuilder separator = new StringBuilder();
 		for (LanguageRule languageRule : languageRuleList) {
 			for (Rule rule : languageRule.getRuleList()) {
@@ -97,6 +99,8 @@ public class ScannerSrxTextIterator extends AbstractTextIterator {
 		} else {
 			return "";
 		}
+		*/
+		return "";
 	}
 	
 	private Map<Pattern, Pattern> createExceptions(
@@ -109,15 +113,21 @@ public class ScannerSrxTextIterator extends AbstractTextIterator {
 		for (LanguageRule languageRule : languageRuleList) {
 			for (Rule rule : languageRule.getRuleList()) {
 				if (rule.isBreak()) {
+					/*
 					Pattern pattern = Pattern.compile(createBreakRegexNoLookahead(rule));
 					
 					Pattern exceptionPattern;
 					if (exception != null) {
-						exceptionPattern = Pattern.compile(exception.toString());
+						try {
+							exceptionPattern = Pattern.compile(exception.toString());
+						} catch (PatternSyntaxException e) {
+							exceptionPattern = null;
+						}
 					} else {
 						exceptionPattern = null;
 					}
 					result.put(pattern, exceptionPattern);
+					*/
 				} else {
 					if (exception == null) {
 						exception = new StringBuilder();

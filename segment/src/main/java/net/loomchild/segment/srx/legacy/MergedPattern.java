@@ -180,7 +180,7 @@ public class MergedPattern {
 			// Input: "aaa"
 			// Pattern "aaa|aa" matches "aaa", but pattern "aa|aaa" matches "aa".
 			// Pattern "(?=aaa|aa)" always matches "aa". 
-			patternBuilder.append("(?=");
+			//patternBuilder.append("(?=");
 			
 			patternBuilder.append(beforePattern);
 			
@@ -213,12 +213,12 @@ public class MergedPattern {
 			String beforePattern = 
 				Util.finitize(rule.getBeforePattern(), maxLookbehindConstructLength);
 			String afterPattern = rule.getAfterPattern();
-			patternBuilder.append("(?:");
+			//patternBuilder.append("(?:");
 			if (beforePattern.length() > 0) {
-				patternBuilder.append("(?<=" + beforePattern + ")");
+				//patternBuilder.append("(?<=" + beforePattern + ")");
 			}
 			if (afterPattern.length() > 0) {
-				patternBuilder.append("(?=" + afterPattern + ")");
+				//patternBuilder.append("(?=" + afterPattern + ")");
 			}
 			patternBuilder.append(")");
 		}

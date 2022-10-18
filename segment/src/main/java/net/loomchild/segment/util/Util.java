@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.jar.Manifest;
 import com.google.re2j.Matcher;
 import com.google.re2j.Pattern;
+import com.google.re2j.PatternSyntaxException;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -50,6 +51,7 @@ public class Util {
 
 	public static final String MANIFEST_PATH = "/META-INF/MANIFEST.MF";
 
+	/*
 	private static final Pattern STAR_PATTERN = Pattern
 			.compile("(?<=(?<!\\\\)(?:\\\\\\\\){0,100})\\*");
 
@@ -61,6 +63,18 @@ public class Util {
 
 	private static final Pattern CAPTURING_GROUP_PATTERN = Pattern
 			.compile("(?<=(?<!\\\\)(?:\\\\\\\\){0,100})\\((?!\\?)");
+	*/
+	private static final Pattern STAR_PATTERN = Pattern
+			.compile("\\*");
+
+	private static final Pattern PLUS_PATTERN = Pattern
+			.compile("\\+");
+
+	private static final Pattern RANGE_PATTERN = Pattern
+			.compile("\\{\\s*([0-9]+)\\s*,\\s*\\}");
+
+	private static final Pattern CAPTURING_GROUP_PATTERN = Pattern
+			.compile("\\(");
 
 	/**
 	 * @param inputStream
@@ -493,8 +507,10 @@ public class Util {
 		String key = "PATTERN_" + regex;
 		Pattern pattern = (Pattern)document.getCache().get(key);
 		if (pattern == null) {
-			pattern = Pattern.compile(regex);
-			document.getCache().put(key, pattern);
+			try {
+				pattern = Pattern.compile(regex);
+				document.getCache().put(key, pattern);
+			} catch (PatternSyntaxException e) {}
 		}
 		return pattern;
 	}
