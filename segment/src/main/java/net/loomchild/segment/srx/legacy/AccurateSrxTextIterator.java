@@ -53,7 +53,8 @@ public class AccurateSrxTextIterator extends AbstractTextIterator {
 		for (LanguageRule languageRule : languageRuleList) {
 			for (Rule rule : languageRule.getRuleList()) {
 				if (!rule.isBreak()) {
-					rule  = new Rule(rule.isBreak(), Util.createLookbehindPattern(rule.getBeforePattern(), maxLookbehindConstructLength), rule.getAfterPattern());
+					//rule  = new Rule(rule.isBreak(), Util.createLookbehindPattern(rule.getBeforePattern(), maxLookbehindConstructLength), rule.getAfterPattern());
+					rule  = new Rule(rule.isBreak(), rule.getBeforePattern(), rule.getAfterPattern());
 				}
 				RuleMatcher matcher = new RuleMatcher(document, rule, text);
 				ruleMatcherList.add(matcher);

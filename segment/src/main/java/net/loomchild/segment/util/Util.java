@@ -527,7 +527,7 @@ public class Util {
 		String newPattern = removeBlockQuotes(pattern);
 		Matcher capturingGroupMatcher = CAPTURING_GROUP_PATTERN
 				.matcher(newPattern);
-		newPattern = capturingGroupMatcher.replaceAll("(?:");
+		//newPattern = capturingGroupMatcher.replaceAll("(?:");
 		return newPattern;
 	}
 	

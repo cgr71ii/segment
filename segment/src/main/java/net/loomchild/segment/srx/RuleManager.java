@@ -115,6 +115,7 @@ public class RuleManager {
 		
 		// As Java does not allow infinite length patterns
 		// in lookbehind, before pattern need to be shortened.
+		/*
 		String beforePattern = 
 			Util.finitize(rule.getBeforePattern(), maxLookbehindConstructLength);
 		String afterPattern = rule.getAfterPattern();
@@ -127,7 +128,7 @@ public class RuleManager {
 			patternBuilder.append("(?=" + afterPattern + ")");
 		}
 		patternBuilder.append(")");
-		
+		*/
 		return patternBuilder.toString();
 		
 	}

@@ -131,10 +131,13 @@ public class ScannerSrxTextIterator extends AbstractTextIterator {
 				} else {
 					if (exception == null) {
 						exception = new StringBuilder();
-					} else if (exception.length() > 0) {
+					}
+					/*
+					else if (exception.length() > 0) {
 						exception.append("|");
 					}
 					exception.append(createExceptionRegex(rule));
+					*/
 				}
 			}
 		}

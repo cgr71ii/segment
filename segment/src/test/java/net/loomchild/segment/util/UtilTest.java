@@ -19,15 +19,5 @@ public class UtilTest extends TestCase {
 		String finitePattern = Util.finitize(INFINITE_PATTERN, 100);
 		assertEquals(EXPECTED_FINITE_PATTERN, finitePattern);
 	}
-
-	public static final String CAPTURING_GROUPS_PATTERN = "(aa)\\(bb\\\\(cc(dd))ee(?:ff)\\Q()\\E";
-	public static final String EXPECTED_NONCAPTURING_GROUPS_PATTERN = "(?:aa)\\(bb\\\\(?:cc(?:dd))ee(?:ff)\\(\\)";
-
-	public void testRemoveCapturingGroups() {
-		String noncapturingGroupsPattern = 
-				Util.removeCapturingGroups(CAPTURING_GROUPS_PATTERN);
-		assertEquals(EXPECTED_NONCAPTURING_GROUPS_PATTERN,
-				noncapturingGroupsPattern);
-	}
 	
 }
